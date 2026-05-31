@@ -87,12 +87,14 @@ test.describe('Caso Feliz - CRUD de Turmas', () => {
         await expect(page.getByText('Teste criado')).toBeVisible();
 
         // UPDATE
-        await page.getByRole('button', { 
-          name: 'Opções' 
-        }).nth(0).click();
+        const primeiraLinha = page.locator('tbody tr').first();
 
-        await page.getByRole('menuitem', {
-            name: 'Editar'
+        await primeiraLinha.getByRole('button', { 
+            name: /Opções/i 
+        }).click();
+
+        await page.getByRole('menuitem', { 
+            name: 'Editar' 
         }).click();
         
         await page.getByRole('textbox', {

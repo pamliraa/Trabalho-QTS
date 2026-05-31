@@ -52,7 +52,13 @@ test.describe('Caso Triste - Validação de campos obrigatórios do Curso', () =
         }).click();
 
         // Validar mensagem de erro
-        await expect(page.getByText('Este campo é obrigatório')).toBeVisible();
+        await expect(
+            page.locator('#curso-nome-error')
+        ).toHaveText('Este campo é obrigatório');
+        
+        await expect(
+            page.locator('#curso-nivel-error')
+        ).toHaveText('Selecione o nível de escolaridade');
 
         // CASO TRISTE 2 - SEM ESCOLARIDADE
         await page.getByRole('textbox', {
@@ -64,7 +70,9 @@ test.describe('Caso Triste - Validação de campos obrigatórios do Curso', () =
         }).click();
 
         // Validar mensagem de erro
-        await expect(page.getByText('Selecione o nível de escolaridade')).toBeVisible();
+        await expect(
+            page.locator('#curso-nivel-error')
+        ).toHaveText('Selecione o nível de escolaridade');
 
         // CASO TRISTE 3 - SEM NOME
         await page.getByRole('textbox', {
@@ -75,14 +83,18 @@ test.describe('Caso Triste - Validação de campos obrigatórios do Curso', () =
             name: 'Nível de Escolaridade'
         }).click();
 
-        await page.getByText('Pós-Graduação').click();
+        await page.getByRole('option', {
+            name: 'Pós-Graduação'
+        }).click();
 
         await page.getByRole('button', {
             name: 'Salvar'
         }).click();
 
         // Validar mensagem de erro
-        await expect(page.getByText('Este campo é obrigatório')).toBeVisible();
+        await expect(
+            page.locator('#curso-nome-error')
+        ).toHaveText('Este campo é obrigatório');
 
     });
 

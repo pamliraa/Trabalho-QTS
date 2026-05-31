@@ -44,7 +44,14 @@ test.describe('Caso Triste - Campos obrigatórios da Turma', () => {
         }).click();
 
         // Validar mensagem de erro
-        await expect(page.getByText('Este campo é obrigatório')).toBeVisible();
+        await expect(page.locator('#classroom-course-error'))
+            .toHaveText('Este campo é obrigatório');
+
+        await expect(page.locator('#classroom-grade-error'))
+            .toHaveText('Este campo é obrigatório');
+
+        await expect(page.locator('#classroom-shift-error'))
+            .toHaveText('Este campo é obrigatório');
 
         // CASO TRISTE 2 - APENAS CURSO E ANO
         await page.getByRole('button', {
@@ -64,7 +71,11 @@ test.describe('Caso Triste - Campos obrigatórios da Turma', () => {
         }).click();
 
         // Validar mensagem de erro
-        await expect(page.getByText('Este campo é obrigatório')).toBeVisible();
+        await expect(page.locator('#classroom-grade-error'))
+            .toHaveText('Este campo é obrigatório');
+
+        await expect(page.locator('#classroom-shift-error'))
+            .toHaveText('Este campo é obrigatório');
         
     });
 

@@ -59,7 +59,9 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
             name: 'Nível de Escolaridade'
         }).click();
 
-        await page.getByText('Técnico').click();
+        await page.getByRole('option', {
+            name: 'Técnico'
+        }).click();
 
         await page.getByRole('button', {
             name: 'Salvar'
@@ -85,7 +87,9 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
             name: 'Nível de Escolaridade'
         }).click();
 
-        await page.getByText('Técnico').click();
+        await page.getByRole('option', {
+            name: 'Técnico'
+        }).click();
 
         await page.getByRole('button', {
             name: 'Salvar'
@@ -106,7 +110,9 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
             name: 'Nível de Escolaridade'
         }).click();
 
-        await page.getByText('Técnico').click();
+        await page.getByRole('option', {
+            name: 'Técnico'
+        }).click();
 
         await page.getByRole('button', {
             name: 'Salvar'

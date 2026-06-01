@@ -95,7 +95,7 @@ test.describe('Caso Feliz - CRUD de Turmas', () => {
 
         await page.getByRole('menuitem', { 
             name: 'Editar' 
-        }).click();
+        }).click({ force: true });
         
         await page.getByRole('textbox', {
             name: 'Descrição:'

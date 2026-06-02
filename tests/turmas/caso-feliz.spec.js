@@ -116,7 +116,7 @@ test.describe('Caso Feliz - CRUD de Turmas', () => {
 
         // DELETE
         await page.getByRole('button', {
-            name: /^Opções$/
+            name: /Opções/i
         }).click();
 
         await page.getByRole('menuitem', {

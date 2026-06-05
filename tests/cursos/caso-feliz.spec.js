@@ -1,61 +1,28 @@
 import { test, expect } from '@playwright/test';
-import { authenticator } from 'otplib';
 
-test.describe('Caso Feliz - CRUD de Cursos', () => {
+test.describe('Caso Feliz - CRUD de Áreas', () => {
 
-    test('Deve criar, visualizar, editar e excluir um curso', async ({ page }) => {
+    test('Deve criar, visualizar, editar e excluir uma área', async ({ page }) => {
 
-        // LOGIN
-        const secret = 'ZFKZGKE3DTP4COGC';
-        const otp = authenticator.generate(secret);
+        await page.goto('https://app.avaliei.com.br/dashboard');
 
-        await page.goto('https://app.avaliei.com.br/login');
-
-        await page.getByRole('textbox', {
-            name: 'Email'
-        }).fill('e2e-super-teacher-39@example.com');
-
-        await page.getByRole('textbox', {
-            name: 'Senha'
-        }).fill('password');
-
+        // ACESSAR TELA
         await page.getByRole('button', {
-            name: 'Entrar'
-        }).click();
-
-        await page.getByRole('textbox', {
-            name: /Código de verificação/i
-        }).fill(otp);
-
-        await page.getByRole('button', {
-            name: /Verificar código/i
-        }).click();
-
-        await expect(page).toHaveURL(/dashboard/);
-
-        // ACESSAR TELA DE CURSOS
-        await page.getByRole('button', {
-            name: 'Turmas'
+            name: 'Disciplinas'
         }).click();
 
         await page.getByRole('link', {
-            name: 'Cursos'
+            name: 'Áreas'
         }).click();
 
         // CREATE
         await page.getByRole('button', {
-            name: 'Adicionar Curso'
+            name: 'Adicionar área'
         }).click();
 
         await page.getByRole('textbox', {
-            name: 'Nome do Curso: *'
-        }).fill('Desenvolvimento de Sistemas');
-
-        await page.getByRole('button', {
-            name: 'Nível de Escolaridade'
-        }).click();
-
-        await page.getByText('Técnico').click();
+            name: /Nome da Área/i
+        }).fill('Área aleatória');
 
         await page.getByRole('button', {
             name: 'Salvar'
@@ -63,43 +30,38 @@ test.describe('Caso Feliz - CRUD de Cursos', () => {
 
         // READ
         await page.getByRole('textbox', {
-            name: 'Pesquisar curso...'
-        }).fill('Desenvolvimento de Sistemas');
+            name: /Pesquisar área/i
+        }).fill('Área aleatória');
 
         await expect(
-            page.getByText('Desenvolvimento de Sistemas')
+            page.getByText('Área aleatória').first()
         ).toBeVisible();
 
         // UPDATE
         await page.getByRole('button', {
             name: 'Editar'
-        }).click();
+        }).first().click();
 
         await page.getByRole('textbox', {
-            name: 'Nome do Curso: *'
-        }).fill('DS');
+            name: /Nome da Área/i
+        }).fill('Área aleatória 123');
 
         await page.getByRole('button', {
             name: 'Salvar'
         }).click();
 
-        // READ
-        await page.getByRole('button', {
-            name: 'Limpar pesquisa'
-        }).click();
-
-        await page.getByRole('textbox', {
-            name: 'Pesquisar curso...'
-        }).fill('DS');
-
         await expect(
-            page.getByText('DS')
+            page.getByText('Área aleatória 123').first()
         ).toBeVisible();
 
         // DELETE
+        await page.getByRole('textbox', {
+            name: /Pesquisar área/i
+        }).fill('Área aleatória 123');
+
         await page.getByRole('button', {
             name: 'Excluir'
-        }).click();
+        }).first().click();
 
         await page.getByRole('button', {
             name: 'Excluir'

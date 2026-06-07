@@ -1,9 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Caso Triste - Áreas', () => {
+test.describe('Caso Feliz - CRUD de Áreas', () => {
 
-    test('Deve validar ações inválidas na tela de Áreas', async ({ page }) => {
+    test('Deve criar, visualizar, editar e excluir uma área', async ({ page }) => {
 
+        await page.goto('https://app.avaliei.com.br/dashboard');
+
+        // ACESSAR TELA DE ÁREAS
         await page.getByRole('button', {
             name: 'Disciplinas'
         }).click();
@@ -12,30 +15,62 @@ test.describe('Caso Triste - Áreas', () => {
             name: 'Áreas'
         }).click();
 
-        // CASO TRISTE 1 - SALVAR SEM PREENCHER NADA
-        await page.getByRole('button', { name: 'Adicionar área' }).click();
+        // CREATE
+        await page.getByRole('button', {
+            name: 'Adicionar área'
+        }).click();
 
-        await page.getByRole('button', { name: 'Salvar' }).click();
+        await page.getByRole('textbox', {
+            name: 'Nome da Área:'
+        }).fill("Área criada");
+
+        await page.getByRole('button', {
+            name: 'Salvar'
+        }).click();
+
+        // READ
+        await page.getByRole('textbox', {
+            name: 'Pesquisar área...'
+        }).fill("Área criada");
 
         await expect(
-            page.getByText(/campo obrigatório/i).first()
+            page.getByText("Área criada")
         ).toBeVisible();
 
-        // CASO TRISTE 2 - EDITAR E SALVAR SEM ALTERAR
-        await page.getByRole('button', { name: 'Editar' }).first().click();
+        // UPDATE
+        await page.getByRole('button', {
+            name: 'Editar'
+        }).first().click();
 
-        await page.getByRole('button', { name: 'Salvar' }).click();
+        await page.getByRole('textbox', {
+            name: 'Nome da Área:'
+        }).fill("Área editada principal");
+
+        await page.getByRole('button', {
+            name: 'Salvar'
+        }).click();
+
+        // READ
+        await page.getByRole('button', {
+            name: 'Limpar pesquisa'
+        }).click();
+
+        await page.getByRole('textbox', {
+            name: 'Pesquisar área...'
+        }).fill("Área editada principal");
 
         await expect(
-            page.getByText(/campo obrigatório|erro/i).first()
+            page.getByText("Área editada principal")
         ).toBeVisible();
 
-        // CASO TRISTE 3 - CANCELAR EXCLUSÃO
-        await page.getByRole('button', { name: 'Excluir' }).first().click();
+        // DELETE
+        await page.getByRole('button', {
+            name: 'Excluir'
+        }).first().click();
 
-        await page.getByRole('button', { name: /cancelar|não/i }).click();
-
-        await expect(page.locator('tbody')).toBeVisible();
+        await page.getByRole('button', {
+            name: 'Excluir'
+        }).click();
 
     });
 

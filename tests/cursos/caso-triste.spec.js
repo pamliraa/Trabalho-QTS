@@ -6,6 +6,7 @@ test.describe('Caso Triste - Validação de campos obrigatórios do Curso', () =
 
         await page.goto('https://app.avaliei.com.br/dashboard');
 
+        // ACESSAR TELA DE CURSOS
         await page.getByRole('button', {
             name: 'Turmas'
         }).click();

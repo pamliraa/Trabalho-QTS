@@ -1,28 +1,34 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Caso Feliz - CRUD de Áreas', () => {
+test.describe('Caso Feliz - CRUD de Cursos', () => {
 
-    test('Deve criar, visualizar, editar e excluir uma área', async ({ page }) => {
+    test('Deve criar, visualizar, editar e excluir um curso', async ({ page }) => {
 
         await page.goto('https://app.avaliei.com.br/dashboard');
 
-        // ACESSAR TELA
+        // ACESSAR TELA DE CURSOS
         await page.getByRole('button', {
-            name: 'Disciplinas'
+            name: 'Turmas'
         }).click();
 
         await page.getByRole('link', {
-            name: 'Áreas'
+            name: 'Cursos'
         }).click();
 
         // CREATE
         await page.getByRole('button', {
-            name: 'Adicionar área'
+            name: 'Adicionar Curso'
         }).click();
 
         await page.getByRole('textbox', {
-            name: /Nome da Área/i
-        }).fill('Área aleatória');
+            name: 'Nome do Curso: *'
+        }).fill('Desenvolvimento de Sistemasss');
+
+        await page.getByRole('button', {
+            name: 'Nível de Escolaridade'
+        }).click();
+
+        await page.getByText('Técnico').click();
 
         await page.getByRole('button', {
             name: 'Salvar'
@@ -30,38 +36,43 @@ test.describe('Caso Feliz - CRUD de Áreas', () => {
 
         // READ
         await page.getByRole('textbox', {
-            name: /Pesquisar área/i
-        }).fill('Área aleatória');
+            name: 'Pesquisar curso...'
+        }).fill('Desenvolvimento de Sistemasss');
 
         await expect(
-            page.getByText('Área aleatória').first()
+            page.getByText('Desenvolvimento de Sistemasss')
         ).toBeVisible();
 
         // UPDATE
         await page.getByRole('button', {
             name: 'Editar'
-        }).first().click();
+        }).click();
 
         await page.getByRole('textbox', {
-            name: /Nome da Área/i
-        }).fill('Área aleatória 123');
+            name: 'Nome do Curso: *'
+        }).fill('DS');
 
         await page.getByRole('button', {
             name: 'Salvar'
         }).click();
 
+        // READ
+        await page.getByRole('button', {
+            name: 'Limpar pesquisa'
+        }).click();
+
+        await page.getByRole('textbox', {
+            name: 'Pesquisar curso...'
+        }).fill('DS');
+
         await expect(
-            page.getByText('Área aleatória 123').first()
+            page.getByText('DS')
         ).toBeVisible();
 
         // DELETE
-        await page.getByRole('textbox', {
-            name: /Pesquisar área/i
-        }).fill('Área aleatória 123');
-
         await page.getByRole('button', {
             name: 'Excluir'
-        }).first().click();
+        }).click();
 
         await page.getByRole('button', {
             name: 'Excluir'

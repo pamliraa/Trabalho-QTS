@@ -10,6 +10,7 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
 
         await page.goto('https://app.avaliei.com.br/dashboard');
 
+        // ACESSAR TELA DE CURSOS
         await page.getByRole('button', {
             name: 'Turmas'
         }).click();
@@ -44,7 +45,7 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
             name: 'Pesquisar curso...'
         }).fill(nome124);
 
-        await expect(page.getByText(nome124).first()).toBeVisible();
+        await expect(page.getByText(nome124)).toBeVisible();
 
         // CREATE - 125 CARACTERES
         await page.getByRole('button', {
@@ -67,7 +68,7 @@ test.describe('Caso de Borda - Limite de caracteres no cadastro de cursos', () =
             name: 'Salvar'
         }).click();
 
-        await expect(page.getByText(nome125).first()).toBeVisible();
+        await expect(page.getByText(nome125)).toBeVisible();
 
         // CREATE - 126 CARACTERES
         await page.getByRole('button', {

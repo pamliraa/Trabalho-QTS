@@ -103,7 +103,7 @@ test.describe('Caso Feliz - Áreas', () => {
 
         // READ
         await page.getByRole('textbox', {
-            name: 'Pesquisar conteúdo...'
+            name: 'Pesquisar área...'
         }).fill('Área criada');
 
         // DELETE

@@ -27,7 +27,9 @@ async function globalSetup() {
     name: /Verificar código/i
   }).click();
 
-  await page.waitForURL(/dashboard/);
+  await page.waitForURL(/dashboard/, {
+    timeout: 60000
+  });
 
   await page.context().storageState({
     path: 'playwright/.auth/user.json'

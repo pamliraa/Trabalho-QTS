@@ -209,6 +209,10 @@ test('Deve validar campos duplicados', async ({ page }) => {
         }).click();
 
         // CONTEÚDO DUPLICADO
+        await page.getByRole('button', {
+            name: 'Adicionar Conteúdo'
+        }).click();
+        
         await page.getByRole('textbox', {
             name: 'Nome do conteúdo: *'
         }).fill('Célula: estrutura e função');

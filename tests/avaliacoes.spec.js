@@ -111,7 +111,7 @@ test.describe('Caso de Borda - Avaliações', () => {
 
 test.describe('Caso Feliz - CRUD de Avaliações', () => {
 
-    test('Deve criar e excluir uma avaliação', async ({ page }) => {
+    test('Deve criar uma avaliação', async ({ page }) => {
 
         const descricaoInicial = 'Muito dificil';
 
@@ -215,7 +215,7 @@ test.describe('Caso Feliz - CRUD de Avaliações', () => {
         }).click();
     });
 
-    test('Deve criar e excluir uma avaliação', async ({ page }) => {
+    test('Deve excluir uma avaliação', async ({ page }) => {
 
         const descricaoInicial = 'Muito dificil';
 

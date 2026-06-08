@@ -145,11 +145,9 @@ test.describe('Caso Feliz - Disciplinas', () => {
     });
 });
 
-import { test, expect } from '@playwright/test';
-
 test.describe('Caso Triste - Disciplina', () => {
 
-    test('Deve validar campos obrigatórios', async ({ page }) => {
+    test('Deve validar campos obrigatórios - sem registros', async ({ page }) => {
 
         await page.goto('https://app.avaliei.com.br/dashboard');
 

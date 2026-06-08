@@ -273,6 +273,10 @@ test.describe('Caso Triste - Avaliação', () => {
 
         // BLOCO PREENCHIDO, MAS AVALIAÇÃO NÃO
         await page.getByRole('button', {
+            name: 'Criar Avaliação'
+        }).click();
+        
+        await page.getByRole('button', {
             name: 'Professor'
         }).click();
 

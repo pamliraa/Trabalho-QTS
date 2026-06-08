@@ -39,10 +39,6 @@ test.describe('Caso de Borda - Conteúdos', () => {
         }).click();
 
         // VALIDAÇÃO
-        await page.getByRole('button', {
-            name: 'Limpar pesquisa'
-        }).click();
-        
         await page.getByRole('textbox', {
             name: 'Pesquisar conteúdo...'
         }).fill(nome125);

@@ -191,6 +191,10 @@ test.describe('Caso Triste - Disciplina', () => {
 
         // PREENCHER APENAS A ÁREA
         await page.getByRole('button', {
+            name: 'Adicionar disciplina'
+        }).click();
+        
+        await page.getByRole('button', {
             name: 'Selecione a área da disciplina'
         }).click();
 

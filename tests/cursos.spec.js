@@ -38,6 +38,10 @@ test.describe('Caso de Borda - Cursos', () => {
             name: 'Salvar'
         }).click();
 
+        await page.getByRole('textbox', {
+            name: 'Pesquisar curso...'
+        }).fill(nome125);
+
         await expect(page.getByText(nome125)).toBeVisible();
     });
 
@@ -204,6 +208,10 @@ test.describe('Caso Triste - Cursos', () => {
         }).click();
 
         // SEM ESCOLARIDADE
+        await page.getByRole('button', {
+            name: 'Adicionar Curso'
+        }).click();
+        
         await page.getByRole('textbox', {
             name: 'Nome do Curso: *'
         }).fill('Redes');

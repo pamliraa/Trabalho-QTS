@@ -32,7 +32,7 @@ test.describe('Caso de Borda - Campo Nome da Disciplina', () => {
         }).click();
 
         await page.getByRole('option', {
-            name: 'Área Teste 1779989273359'
+            name: 'Matemática e suas tecnologias'
         }).click();
 
         await page.getByRole('button', {
@@ -56,7 +56,7 @@ test.describe('Caso de Borda - Campo Nome da Disciplina', () => {
         }).click();
 
         await page.getByRole('option', {
-            name: 'Área Teste 1779989273359'
+            name: 'Matemática e suas tecnologias'
         }).click();
 
         await page.getByRole('button', {

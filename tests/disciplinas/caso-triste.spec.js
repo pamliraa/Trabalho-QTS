@@ -4,14 +4,22 @@ test.describe('Caso Triste - Campos obrigatórios da Disciplina', () => {
 
     test('Deve validar campos obrigatórios', async ({ page }) => {
 
-        await page.goto('https://app.avaliei.com.br/disciplinas');
+        await page.goto('https://app.avaliei.com.br/dashboard');
 
         // ACESSAR TELA DE DISCIPLINAS
+        await page.getByRole('button', {
+            name: 'Disciplinas'
+        }).click();
+
+        await page.getByRole('link', {
+            name: 'Disciplinas'
+        }).click();
+
+        // CASO TRISTE 1 - SALVAR SEM PREENCHER NADA
         await page.getByRole('button', {
             name: 'Adicionar disciplina'
         }).click();
 
-        // CASO TRISTE 1 - SALVAR SEM PREENCHER NADA
         await page.getByRole('button', {
             name: 'Salvar'
         }).click();
@@ -28,7 +36,7 @@ test.describe('Caso Triste - Campos obrigatórios da Disciplina', () => {
         }).click();
 
         await page.getByRole('option', {
-            name: 'Área Teste 1779989091539'
+            name: 'Matemática e suas tecnologias'
         }).click();
 
         await page.getByRole('button', {

@@ -12,11 +12,11 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
     await page.goto('https://app.avaliei.com.br/dashboard');
 
     await page.getByRole('button', {
-    name: 'Disciplinas'
+        name: 'Disciplinas'
     }).click();
 
     await page.getByRole('link', {
-    name: 'Disciplinas'
+        name: 'Disciplinas'
     }).click();
 
     // ====================
@@ -35,7 +35,9 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
         name: /Selecione a área da disciplina/i
     }).click();
 
-    await page.getByRole('option').nth(5).click();
+    await page.getByRole('option', {
+        name: 'Formação técnica e profissional'
+    }).click();
 
     await page.getByRole('button', {
         name: 'Salvar'
@@ -45,8 +47,12 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
     // READ
     // ====================
 
+    await page.getByRole('textbox', {
+        name: 'Pesquisar disciplina...'
+    }).fill(disciplinaInicial);
+            
     await expect(
-        page.getByText(disciplinaInicial).first()
+        page.getByText(disciplinaInicial)
     ).toBeVisible();
 
     // ====================
@@ -55,7 +61,7 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
 
     await page.getByRole('button', {
         name: 'Editar'
-    }).last().click();
+    }).first().click();
 
     await page.getByRole('textbox', {
         name: 'Nome da disciplina: *'
@@ -65,8 +71,17 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
         name: 'Salvar'
     }).click();
 
+    // READ
+    await page.getByRole('button', {
+        name: 'Limpar pesquisa'
+    }).click();
+    
+    await page.getByRole('textbox', {
+        name: 'Pesquisar disciplina...'
+    }).fill(disciplinaEditada);
+            
     await expect(
-        page.getByText(disciplinaEditada).first()
+        page.getByText(disciplinaEditada)
     ).toBeVisible();
 
     // ====================
@@ -75,7 +90,7 @@ test('Deve criar, visualizar, editar e excluir uma disciplina', async ({ page })
 
     await page.getByRole('button', {
         name: 'Excluir'
-    }).last().click();
+    }).first().click();
 
     await page.getByRole('button', {
         name: 'Excluir'
